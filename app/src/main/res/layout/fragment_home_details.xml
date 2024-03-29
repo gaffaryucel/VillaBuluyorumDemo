@@ -23,9 +23,9 @@
             android:orientation="vertical">
 
             <ScrollView
-                android:layout_weight="1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_weight="1"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -93,19 +93,19 @@
                                 android:textColor="@color/white"
                                 android:textSize="20sp"
                                 android:textStyle="bold"
-                                app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintBottom_toTopOf="@id/textDetailAddress"
+                                app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@id/guideLineCenterHorizontal" />
 
                             <TextView
                                 android:id="@+id/textDetailAddress"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                app:layout_constraintBottom_toTopOf="@id/imageBedRoom"
                                 android:maxLines="1"
                                 android:text="Adres"
                                 android:textColor="@color/white"
                                 android:textSize="18sp"
+                                app:layout_constraintBottom_toTopOf="@id/imageBedRoom"
                                 app:layout_constraintStart_toStartOf="@+id/textDetailTitle"
                                 app:layout_constraintTop_toBottomOf="@id/textDetailTitle" />
 
@@ -113,9 +113,9 @@
                                 android:id="@+id/imageBedRoom"
                                 android:layout_width="30dp"
                                 android:layout_height="30dp"
-                                app:layout_constraintBottom_toBottomOf="parent"
                                 android:background="@color/detail_page_transparent_icon"
                                 android:scaleType="centerInside"
+                                app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintStart_toStartOf="@+id/textDetailTitle"
                                 app:layout_constraintTop_toBottomOf="@+id/textDetailAddress"
                                 app:shapeAppearanceOverlay="@style/circle"
@@ -214,8 +214,8 @@
 
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/imageProfile"
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
                         android:layout_marginTop="8dp"
                         android:src="@drawable/avatar_boy"
                         app:layout_constraintStart_toStartOf="@id/cardImage"
@@ -227,7 +227,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:text="Walter Bishop"
-                        android:textSize="20sp"
+                        android:textSize="18sp"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toTopOf="@id/textDetailProfile"
                         app:layout_constraintStart_toEndOf="@id/imageProfile"
@@ -239,32 +239,20 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Emlakçı"
-                        android:textSize="18sp"
+                        android:textSize="16sp"
                         app:layout_constraintBottom_toBottomOf="@id/imageProfile"
                         app:layout_constraintStart_toStartOf="@id/textDetailProfileTitle"
                         app:layout_constraintTop_toBottomOf="@id/textDetailProfileTitle"
                         tools:ignore="HardcodedText" />
 
                     <androidx.appcompat.widget.AppCompatImageButton
-                        android:id="@+id/buttonDetailCall"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_marginEnd="10dp"
-                        android:background="@drawable/rounded_button_background"
-                        android:src="@drawable/baseline_call_24"
-                        app:layout_constraintBottom_toBottomOf="@id/imageProfile"
-                        app:layout_constraintEnd_toStartOf="@id/buttonDetailChat"
-                        app:layout_constraintTop_toTopOf="@id/imageProfile" />
-
-                    <androidx.appcompat.widget.AppCompatImageButton
                         android:id="@+id/buttonDetailChat"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_marginEnd="10dp"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
                         android:background="@drawable/rounded_button_background"
                         android:src="@drawable/baseline_chat_bubble_24"
                         app:layout_constraintBottom_toBottomOf="@id/imageProfile"
-                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintEnd_toEndOf="@id/cardImage"
                         app:layout_constraintTop_toTopOf="@id/imageProfile" />
 
                     <androidx.recyclerview.widget.RecyclerView
@@ -282,22 +270,22 @@
                     <androidx.appcompat.widget.AppCompatImageView
                         android:layout_width="0dp"
                         android:layout_height="300dp"
-                        app:layout_constraintTop_toBottomOf="@id/carouselRecyclerView"
+                        android:layout_margin="16dp"
+                        android:scaleType="centerCrop"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:srcCompat="@drawable/maps"
-                        android:scaleType="centerCrop"
-                        android:layout_margin="16dp"/>
+                        app:layout_constraintTop_toBottomOf="@id/carouselRecyclerView"
+                        app:srcCompat="@drawable/maps" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </ScrollView>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_weight="1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:padding="4dp">
 
                 <androidx.appcompat.widget.AppCompatButton
@@ -312,19 +300,18 @@
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/textDetailPrice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="20dp"
+                    android:layout_margin="20dp"
                     android:text="2.000 TL / Aylık"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="@id/buttonDetailRent"
-                    app:layout_constraintEnd_toStartOf="@id/buttonDetailRent"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@id/buttonDetailRent"
                     tools:ignore="HardcodedText" />
             </androidx.constraintlayout.widget.ConstraintLayout>
