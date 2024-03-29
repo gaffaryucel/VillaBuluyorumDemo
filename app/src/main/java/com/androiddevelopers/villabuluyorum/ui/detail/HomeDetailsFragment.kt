@@ -58,10 +58,6 @@ class HomeDetailsFragment : Fragment() {
             buttonDetailChat.setOnClickListener {
                 Toast.makeText(it.context, "Mesajlar açılıyor", Toast.LENGTH_SHORT).show()
             }
-
-            buttonDetailCall.setOnClickListener {
-                Toast.makeText(it.context, "Arama yapılıyor", Toast.LENGTH_SHORT).show()
-            }
         }
     }
 
