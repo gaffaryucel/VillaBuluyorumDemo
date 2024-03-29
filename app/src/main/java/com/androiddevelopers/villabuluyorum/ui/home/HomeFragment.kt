@@ -5,9 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.androiddevelopers.villabuluyorum.R
 import com.androiddevelopers.villabuluyorum.adapter.BestHouseAdapter
 import com.androiddevelopers.villabuluyorum.adapter.HouseAdapter
 import com.androiddevelopers.villabuluyorum.databinding.FragmentHomeBinding
@@ -17,6 +20,7 @@ import com.androiddevelopers.villabuluyorum.ui.detail.HomeDetailsViewModel
 class HomeFragment : Fragment() {
     private lateinit var houseAdapter: HouseAdapter
     private lateinit var bestHouseAdapter: BestHouseAdapter
+    private lateinit var searchAdapter: BestHouseAdapter
     private lateinit var viewModel: HomeDetailsViewModel
     private lateinit var binding: FragmentHomeBinding
 
@@ -31,6 +35,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this).get(HomeDetailsViewModel::class.java)
+
         houseAdapter = HouseAdapter()
         binding.rvCloseHomes.layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
         binding.rvCloseHomes.adapter = houseAdapter
@@ -38,6 +43,10 @@ class HomeFragment : Fragment() {
         bestHouseAdapter = BestHouseAdapter()
         binding.rvBest.layoutManager = LinearLayoutManager(requireContext())
         binding.rvBest.adapter = bestHouseAdapter
+
+        searchAdapter = BestHouseAdapter()
+        binding.rvSearch.layoutManager = LinearLayoutManager(requireContext())
+        binding.rvSearch.adapter = searchAdapter
 
 
         val houseList = arrayListOf(
@@ -183,8 +192,34 @@ class HomeFragment : Fragment() {
                 12
             )
         )
-
-
+        var close = true
+        binding.ivFilter.setOnClickListener {
+            binding.layoutSearch.visibility = View.VISIBLE
+        }
+        binding.btnSearch.setOnClickListener {
+            close = false
+            val minPrice = binding.etMinPrice.text.toString()
+            val maxPrice = binding.etMaxPrice.text.toString()
+            binding.btnCancel.visibility = View.VISIBLE
+           try {
+               if (minPrice.isNotEmpty() || maxPrice.isNotEmpty()){
+                   sortByPrice(houseList,minPrice.toDouble(),maxPrice.toDouble())
+               }
+           }catch (e : Exception){
+               Toast.makeText(requireContext(), "Hatalı Fiyat Bilgisi", Toast.LENGTH_SHORT).show()
+           }
+            binding.etMinPrice.setText("")
+            binding.etMaxPrice.setText("")
+            binding.btnCancel.setText("Sıfırla")
+        }
+        binding.btnCancel.setOnClickListener {
+            resetLayout()
+            binding.btnCancel.setText("Kapat")
+            if (close){
+                binding.layoutSearch.visibility = View.GONE
+            }
+            close = true
+        }
         // Adaptöre veri listesini ata
         houseAdapter.housesList = houseList
         houseAdapter.notifyDataSetChanged()
@@ -192,6 +227,59 @@ class HomeFragment : Fragment() {
         bestHouseAdapter.housesList = houseList
         bestHouseAdapter.notifyDataSetChanged()
 
-    }
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                query?.let {
+                    if (query.isNotEmpty()){
+                        sortByName(houseList, it)
+                    }else{
+                        resetLayout()
+                    }
+                }
+                return false
+            }
 
+            override fun onQueryTextChange(newText: String?): Boolean {
+                newText?.let {
+                    if (newText.isNotEmpty()){
+                        sortByName(houseList, it)
+                    }else{
+                        resetLayout()
+                    }
+                }
+                return true
+            }
+        })
+
+
+    }
+    private fun sortByName(houses: List<House>, isim: String) {
+        val newList =  houses.filter { it.name.contains(isim, ignoreCase = true) }
+        binding.layoutHome.visibility = View.GONE
+        binding.rvSearch.visibility = View.VISIBLE
+        if (newList.isEmpty()){
+            binding.layoutEmptyList.visibility = View.VISIBLE
+        }else{
+            binding.layoutEmptyList.visibility = View.GONE
+        }
+        searchAdapter.housesList = newList
+        searchAdapter.notifyDataSetChanged()
+    }
+    private fun resetLayout(){
+        binding.layoutHome.visibility = View.VISIBLE
+        binding.rvSearch.visibility = View.GONE
+        binding.layoutEmptyList.visibility = View.GONE
+    }
+    private fun sortByPrice(houses: List<House>, minFiyat: Double, maxFiyat: Double) {
+        val newList =  houses.filter { it.rentPrice in minFiyat..maxFiyat }
+        searchAdapter.housesList = newList
+        searchAdapter.notifyDataSetChanged()
+        if (newList.isEmpty()){
+            binding.layoutEmptyList.visibility = View.VISIBLE
+        }else{
+            binding.layoutEmptyList.visibility = View.GONE
+        }
+        binding.layoutHome.visibility = View.GONE
+        binding.rvSearch.visibility = View.VISIBLE
+    }
 }
