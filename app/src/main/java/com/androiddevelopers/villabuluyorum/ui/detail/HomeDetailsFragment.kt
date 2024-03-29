@@ -1,32 +1,52 @@
 package com.androiddevelopers.villabuluyorum.ui.detail
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.androiddevelopers.villabuluyorum.R
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.navArgs
+import com.androiddevelopers.villabuluyorum.databinding.FragmentHomeDetailsBinding
 
 class HomeDetailsFragment : Fragment() {
+    private val viewModel: HomeDetailsViewModel by viewModels()
+    private var _binding: FragmentHomeDetailsBinding? = null
+    private val binding get() = _binding!!
 
-    companion object {
-        fun newInstance() = HomeDetailsFragment()
-    }
-
-    private lateinit var viewModel: HomeDetailsViewModel
+    private val args: HomeDetailsFragmentArgs by navArgs()
+    private val house = args.house
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_home_details, container, false)
+    ): View {
+        _binding = FragmentHomeDetailsBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(HomeDetailsViewModel::class.java)
-        // TODO: Use the ViewModel
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setClicks()
+        setViews()
+    }
+
+    private fun setClicks() {
+        binding.imageBackNavigation.setOnClickListener {
+            Navigation.findNavController(it).popBackStack()
+        }
+    }
+
+    private fun setViews() {
+        with(binding) {
+            textDetailTitle.text = house.title
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 
 }
