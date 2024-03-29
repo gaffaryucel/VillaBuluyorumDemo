@@ -21,16 +21,10 @@ private var _binding: FragmentHomeBinding? = null
     container: ViewGroup?,
     savedInstanceState: Bundle?
   ): View {
-    val homeViewModel =
-            ViewModelProvider(this).get(HomeViewModel::class.java)
-
+    val homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
     _binding = FragmentHomeBinding.inflate(inflater, container, false)
     val root: View = binding.root
 
-    val textView: TextView = binding.textHome
-    homeViewModel.text.observe(viewLifecycleOwner) {
-      textView.text = it
-    }
     return root
   }
 
