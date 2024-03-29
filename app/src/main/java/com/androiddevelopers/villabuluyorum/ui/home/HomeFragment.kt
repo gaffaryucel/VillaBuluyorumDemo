@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.androiddevelopers.villabuluyorum.adapter.BestHouseAdapter
 import com.androiddevelopers.villabuluyorum.adapter.HouseAdapter
 import com.androiddevelopers.villabuluyorum.databinding.FragmentHomeBinding
 import com.androiddevelopers.villabuluyorum.model.House
@@ -15,6 +16,7 @@ import com.androiddevelopers.villabuluyorum.ui.detail.HomeDetailsViewModel
 
 class HomeFragment : Fragment() {
     private lateinit var houseAdapter: HouseAdapter
+    private lateinit var bestHouseAdapter: BestHouseAdapter
     private lateinit var viewModel: HomeDetailsViewModel
     private lateinit var binding: FragmentHomeBinding
 
@@ -32,6 +34,11 @@ class HomeFragment : Fragment() {
         houseAdapter = HouseAdapter()
         binding.rvCloseHomes.layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
         binding.rvCloseHomes.adapter = houseAdapter
+
+        bestHouseAdapter = BestHouseAdapter()
+        binding.rvBest.layoutManager = LinearLayoutManager(requireContext())
+        binding.rvBest.adapter = bestHouseAdapter
+
 
         val houseList = arrayListOf(
             House(
@@ -162,11 +169,13 @@ class HomeFragment : Fragment() {
             )
         )
 
-        println("create")
 
         // Adaptöre veri listesini ata
         houseAdapter.housesList = houseList
         houseAdapter.notifyDataSetChanged()
+
+        bestHouseAdapter.housesList = houseList
+        bestHouseAdapter.notifyDataSetChanged()
 
     }
 

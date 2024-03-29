@@ -654,3 +654,5 @@ w
 G.idea/sonarlint/issuestore/4/6/46b4eb065d2a7dcf50ad67b844c7c0490a85e44b,d\3\d3cce92e2ee1b8ebfa32eff9d3d4ccfeae73ab67
 w
 G.idea/sonarlint/issuestore/4/8/4863281891d32ef796d6f680d78cb100e7c940be,d\8\d83eba5ea733cb5c0531ef72186b1c1f282329c8
+‚
+Rapp/src/main/java/com/androiddevelopers/villabuluyorum/adapter/BestHouseAdapter.kt,5\8\589a291507f89c5f306eebe37e37562e64ed38c4
