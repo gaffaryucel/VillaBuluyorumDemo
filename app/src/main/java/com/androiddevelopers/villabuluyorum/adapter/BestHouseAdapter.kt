@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.androiddevelopers.villabuluyorum.databinding.RowBestHouseBinding
 import com.androiddevelopers.villabuluyorum.databinding.RowHouseBinding
 import com.androiddevelopers.villabuluyorum.model.House
+import com.androiddevelopers.villabuluyorum.ui.home.HomeFragmentDirections
 import com.bumptech.glide.Glide
 
 class BestHouseAdapter : RecyclerView.Adapter<BestHouseAdapter.HouseViewHolder>() {
@@ -48,7 +49,9 @@ class BestHouseAdapter : RecyclerView.Adapter<BestHouseAdapter.HouseViewHolder>(
             holder.binding.tvBathroom.text ="${house.bathrooms} Banyo"
 
             holder.itemView.setOnClickListener {
-
+                val directions =
+                    HomeFragmentDirections.actionNavigationHomeToHomeDetailsFragment(house)
+                Navigation.findNavController(it).navigate(directions)
             }
         } catch (e: Exception) {
             // Hata durumunda bir işlem yapabilirsiniz
