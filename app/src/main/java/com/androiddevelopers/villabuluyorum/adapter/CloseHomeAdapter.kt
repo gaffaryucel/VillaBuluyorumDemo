@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.androiddevelopers.villabuluyorum.databinding.RowHouseBinding
 import com.androiddevelopers.villabuluyorum.model.House
+import com.androiddevelopers.villabuluyorum.ui.home.HomeFragment
 import com.bumptech.glide.Glide
 
 class HouseAdapter : RecyclerView.Adapter<HouseAdapter.HouseViewHolder>() {
@@ -39,6 +40,7 @@ class HouseAdapter : RecyclerView.Adapter<HouseAdapter.HouseViewHolder>() {
         val house = housesList[position]
 
         try {
+            println("try")
             Glide.with(holder.itemView.context).load(house.mainImage)
                 .into(holder.binding.imageHouse)
 
@@ -51,6 +53,7 @@ class HouseAdapter : RecyclerView.Adapter<HouseAdapter.HouseViewHolder>() {
             }
         } catch (e: Exception) {
             // Hata durumunda bir işlem yapabilirsiniz
+            println("error : "+e)
         }
     }
 

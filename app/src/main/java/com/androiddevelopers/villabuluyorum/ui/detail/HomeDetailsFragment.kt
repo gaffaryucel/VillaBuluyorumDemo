@@ -6,27 +6,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.androiddevelopers.villabuluyorum.R
+import com.androiddevelopers.villabuluyorum.adapter.HouseAdapter
+import com.androiddevelopers.villabuluyorum.databinding.FragmentHomeBinding
+import com.androiddevelopers.villabuluyorum.model.House
 
 class HomeDetailsFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = HomeDetailsFragment()
-    }
 
-    private lateinit var viewModel: HomeDetailsViewModel
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_home_details, container, false)
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(HomeDetailsViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
 
 }
