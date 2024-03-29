@@ -1,5 +1,6 @@
 package com.androiddevelopers.villabuluyorum.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.Navigation
@@ -8,6 +9,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.androiddevelopers.villabuluyorum.databinding.RowHouseBinding
 import com.androiddevelopers.villabuluyorum.model.House
+import com.androiddevelopers.villabuluyorum.ui.home.HomeFragment
 import com.androiddevelopers.villabuluyorum.ui.home.HomeFragmentDirections
 import com.bumptech.glide.Glide
 
@@ -28,8 +30,7 @@ class HouseAdapter : RecyclerView.Adapter<HouseAdapter.HouseViewHolder>() {
         get() = recyclerListDiffer.currentList
         set(value) = recyclerListDiffer.submitList(value)
 
-    inner class HouseViewHolder(val binding: RowHouseBinding) :
-        RecyclerView.ViewHolder(binding.root)
+    inner class HouseViewHolder(val binding: RowHouseBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HouseViewHolder {
         val binding = RowHouseBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -40,6 +41,7 @@ class HouseAdapter : RecyclerView.Adapter<HouseAdapter.HouseViewHolder>() {
         val house = housesList[position]
 
         try {
+            println("try")
             Glide.with(holder.itemView.context).load(house.mainImage)
                 .into(holder.binding.imageHouse)
 
@@ -54,6 +56,7 @@ class HouseAdapter : RecyclerView.Adapter<HouseAdapter.HouseViewHolder>() {
             }
         } catch (e: Exception) {
             // Hata durumunda bir işlem yapabilirsiniz
+            println("error : "+e)
         }
     }
 
