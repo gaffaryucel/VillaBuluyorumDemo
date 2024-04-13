@@ -14,6 +14,11 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="circle">
+        <item name="cornerSize">50%</item>
+        <item name="cornerFamily">rounded</item>
+    </style>
+
     <style name="ApplicationMainTheme" parent="Theme.Design.Light">
         <item name="android:statusBarColor">@color/white</item>
         <item name="android:windowLightStatusBar">true</item>

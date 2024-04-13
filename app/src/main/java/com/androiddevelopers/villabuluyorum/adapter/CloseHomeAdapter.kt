@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.androiddevelopers.villabuluyorum.databinding.RowHouseBinding
 import com.androiddevelopers.villabuluyorum.model.House
 import com.androiddevelopers.villabuluyorum.ui.home.HomeFragment
+import com.androiddevelopers.villabuluyorum.ui.home.HomeFragmentDirections
 import com.bumptech.glide.Glide
 
 class HouseAdapter : RecyclerView.Adapter<HouseAdapter.HouseViewHolder>() {
@@ -49,7 +50,9 @@ class HouseAdapter : RecyclerView.Adapter<HouseAdapter.HouseViewHolder>() {
             holder.binding.textDistance.text = house.distance
 
             holder.itemView.setOnClickListener {
-
+                val directions =
+                    HomeFragmentDirections.actionNavigationHomeToHomeDetailsFragment(house)
+                Navigation.findNavController(it).navigate(directions)
             }
         } catch (e: Exception) {
             // Hata durumunda bir işlem yapabilirsiniz
